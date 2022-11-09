@@ -10,9 +10,8 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import UserCard from "../components/UserCard";
 
-import { Routes, Route, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function UserPage(){
 

@@ -3,10 +3,6 @@ import {getAllUsers} from "../services/Users";
 import Header from "../components/Header";
 import UserCard from "../components/UserCard";
 
-import {Link} from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-
-
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
