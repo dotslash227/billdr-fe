@@ -1,7 +1,11 @@
 import React from "react";
 import {getAllUsers} from "../services/Users";
 import Header from "../components/Header";
-import {UserCard} from "../components/UserCard";
+import UserCard from "../components/UserCard";
+
+import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -11,28 +15,24 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import UserCard from "../components/UserCard";
 
 function Home(){
 
     const [users, setUsers] = React.useState([])
 
     React.useEffect(()=>{
-        getUsers()
-    }, [])
+        getUsers();
+    });
 
 
     function getUsers(){
-        if (users.length != 0){
-            setUsers([])
-        }
         getAllUsers((err, response)=>{
             if (err){
                 alert("There was an error in fetching characters. Check console logs.")
                 console.log(err);
             }
             else {
-                setUsers(response.data.data)
+                setUsers(response.data);
             }
         })
     }
@@ -77,7 +77,7 @@ const theme = createTheme();
         <Container sx={{ py: 8 }} maxWidth="xl">
           <Grid container spacing={4}>
             {users.map((card) => (
-                <UserCard user={card} />
+                    <UserCard user={card} />
             ))}
           </Grid>
         </Container>
