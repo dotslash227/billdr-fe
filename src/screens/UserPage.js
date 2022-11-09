@@ -11,13 +11,14 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 function UserPage(){
 
     const [user, setUser] = React.useState([]);
     let params = useParams();
     const userId = params.userId;
+    const navigation = useNavigate();
 
 
     React.useEffect(()=>{
@@ -36,6 +37,24 @@ function UserPage(){
                 setUser(response.data);
             }
         });
+    }
+
+    function renderUser(){
+        if (user.length == 0){
+            return(<div><p>Rendering Users ... </p></div>)
+        } else{
+            return(
+                <div>
+                    <p>Name : {user.name}</p>
+                      <p>Email : {user.email}</p>
+                      <p>Phone : {user.phone}</p>
+                      <p>Username : {user.username}</p>
+                      <p>Website : {user.website}</p>
+                      <p>Address : {`${user.address.suite}, ${user.address.street}, ${user.address.city} - ${user.address.zipcode}`}</p>
+                      <p>Company Name : {`${user.company.name}`}</p>
+                </div>
+                )
+        }
     }
 
 
@@ -63,8 +82,16 @@ function UserPage(){
             >
               User Page
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
-                <a href="#">Go Back</a>
+              <Typography
+              component="h1"
+              variant="h4"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+                  <a href="" onClick={()=>{
+                      navigation("/")
+                  }}>Go Back</a>
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -78,13 +105,7 @@ function UserPage(){
         <Container sx={{ py: 8 }} maxWidth="sm">
           <Grid container spacing={4}>
                   <Grid item xs={10}>
-                      <p>Name : {user.name}</p>
-                      <p>Email : {user.email}</p>
-                      <p>Phone : {user.phone}</p>
-                      <p>Username : {user.username}</p>
-                      <p>Website : {user.website}</p>
-                      <p>Address : {`${user.address.suite}, ${user.address.street}, ${user.address.city} - ${user.address.zipcode}`}</p>
-                      <p>Company Name : {`${user.company.name}`}</p>
+                      {renderUser()}
                   </Grid>
           </Grid>
         </Container>

@@ -16,7 +16,7 @@ export default function UserCard(props){
                   <a href="#">
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                  onClick={()=>navigate("/user/1")}
+                  onClick={()=>navigate("/user/" + props.user.id)}
                 >
                   <CardMedia
                     component="img"
