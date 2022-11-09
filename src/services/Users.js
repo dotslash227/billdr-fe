@@ -13,6 +13,11 @@ export function getAllUsers(callback){
 }
 
 // Service method to fetch a single user from the public api
-function getUser(userId, callback){
-
-}
+export function getUser(userId, callback){
+    const requestUrl = baseUrl + "/users/" + userId;
+    axios.get(requestUrl).then((response)=>{
+        return callback(null, response);
+    }).catch((error)=>{
+        return callback(error, null);
+    });
+};
