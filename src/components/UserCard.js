@@ -5,13 +5,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
+import {useNavigate} from "react-router-dom";
+
 export default function UserCard(props){
+
+    let navigate = useNavigate();
+
     return(
         <Grid item key={props.user.id} xs={3} sm={3} md={3}>
                   <a href="#">
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
-                  onClick={()=>alert("A card has been clicked")}
+                  onClick={()=>navigate("/user/1")}
                 >
                   <CardMedia
                     component="img"
