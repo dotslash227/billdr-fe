@@ -5,9 +5,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 
-export default function SuperHeroCard(props){
+export default function UserCard(props){
     return(
-        <Grid item key={props.hero.name} xs={3} sm={3} md={3}>
+        <Grid item key={props.user.id} xs={3} sm={3} md={3}>
                   <a href="#">
                 <Card
                   sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}
@@ -19,12 +19,12 @@ export default function SuperHeroCard(props){
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image={props.hero.image}
-                    alt={props.hero.name}
+                    image="https://assets-prd.ignimgs.com/2022/02/28/the-batman-1646069186545.jpg?width=3840"
+                    alt={props.user.name}
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5" component="h2">
-                        {props.hero.name}
+                        {props.user.name}
                     </Typography>
                   </CardContent>
                 </Card>
