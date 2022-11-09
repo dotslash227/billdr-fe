@@ -1,8 +1,7 @@
 import React from "react";
-import {fetchCharacter} from "../services/Characters";
+import {getAllUsers} from "../services/Users";
 import Header from "../components/Header";
-import SuperHeroCard from "../components/SuperHeroCard";
-import Button from '@mui/material/Button';
+import {UserCard} from "../components/UserCard";
 
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
@@ -12,37 +11,31 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import UserCard from "../components/UserCard";
 
 function Home(){
 
-    const [selectedFeature, setSelectedFeature] = React.useState("stories")
-    const [superHeroes, setSuperHeroes] = React.useState([])
+    const [users, setUsers] = React.useState([])
 
     React.useEffect(()=>{
-        getCharacters(selectedFeature)
-    }, [selectedFeature])
-
-    const handleFeatureChange = (featureName) =>{
-        setSelectedFeature(featureName)
-        getCharacters(selectedFeature);
-    }
+        getUsers()
+    }, [])
 
 
-    function getCharacters(feature){
-        if (superHeroes.length != 0){
-            setSuperHeroes([])
+    function getUsers(){
+        if (users.length != 0){
+            setUsers([])
         }
-        fetchCharacter(feature, (err, response)=>{
+        getAllUsers((err, response)=>{
             if (err){
                 alert("There was an error in fetching characters. Check console logs.")
                 console.log(err);
             }
             else {
-                setSuperHeroes(response.data.data)
+                setUsers(response.data.data)
             }
         })
     }
-
 
 
 const theme = createTheme();
@@ -50,9 +43,8 @@ const theme = createTheme();
     return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-        <Header title="Marvel Characters App" />
+        <Header title="Listing all users" />
       <main>
-        {/* Hero unit */}
         <Box
           sx={{
             bgcolor: 'background.paper',
@@ -68,11 +60,10 @@ const theme = createTheme();
               color="text.primary"
               gutterBottom
             >
-              Marvel Characters App for HippoC
+              All Users
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              App Backend and Front-end authored by Dhruv Arora. Click on a button belo to select the feature you would
-                like to display for the comic. The default is Stories.
+              App that display a list of users from an API. Clicking on a User will lead to a User Page.
             </Typography>
             <Stack
               sx={{ pt: 4 }}
@@ -80,18 +71,13 @@ const theme = createTheme();
               spacing={2}
               justifyContent="center"
             >
-              <Button variant="contained" onClick={()=>handleFeatureChange("name")}>Name</Button>
-              <Button variant="outlined" onClick={()=>handleFeatureChange("stories")}>Stories List</Button>
-                <Button variant="outlined" onClick={()=>handleFeatureChange("comics")}>Comics List</Button>
-                <Button variant="outlined" onClick={()=>handleFeatureChange("series")}>Series List</Button>
             </Stack>
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="xl">
-          {/* End hero unit */}
           <Grid container spacing={4}>
-            {superHeroes.map((card) => (
-                <SuperHeroCard hero={card} />
+            {users.map((card) => (
+                <UserCard user={card} />
             ))}
           </Grid>
         </Container>
